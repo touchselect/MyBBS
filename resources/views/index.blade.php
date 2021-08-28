@@ -1,13 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>my bbs</title>
-</head>
-<body>
+@extends('layout')
+@section('content')
 	<h1>my bbs</h1>
 	<p>{{$message}}</p>
-</body>
-</html>
+    @include('search')
+    <table class="table table-striped table-hover">
+        @foreach ($articles as $article)
+            <tr>
+                <td>
+                    <a href="{{route('article.show' , ['id' => $article->id])}}">
+                        {{$article->content}}
+                    </a>
+                </td>
+                <td>
+                    {{$article->user_name}}
+                </td>
+            </tr>
+        @endforeach
+    </table>
+    <div>
+        <a href="{{route('article.new')}}" class="btn btn-outline-primary" >新規投稿</a>
+    </div>
+@endsection
